@@ -1,3 +1,3 @@
-[![Build Status](https://travis-ci.org/uhawaii-system-its-mis-elements/google-at-uh.svg?branch=master)](https://travis-ci.org/uhawaii-system-its-mis-elements/google-at-uh)
+[![Build Status](https://travis-ci.org/uhawaii-system-its-mis-elements/friendly-date.svg?branch=master)](https://travis-ci.org/uhawaii-system-its-mis-elements/friendly-date)
 
-_[Demo and API docs](http://uhawaii-system-its-mis-elements.github.io/google-at-uh/)_
+_[Demo and API docs](http://uhawaii-system-its-mis-elements.github.io/friendly-date/)_
