@@ -1,0 +1,96 @@
+<link rel="import" href="../polymer/polymer.html">
+<script src="../moment/moment.js"></script>
+
+<!-- http://www.google.com/design/spec/patterns/data-formats.html# -->
+
+<dom-module id="friendly-date">
+<template>
+	<span>{{friendlyDate}}</span>
+</template>
+<script>
+	//Avoid jshint error -'moment' is not defined.- when using moment
+	var moment = moment;
+	Polymer({
+		is: 'friendly-date',
+		properties: {
+			date: {
+				type: String,
+				observer: 'dateChanged'
+			},
+			hideYear: {
+				type: Boolean,
+				value: false
+			},
+			friendlyDate: {
+				type: String,
+				notify: true,
+				readOnly: true
+			}
+		},
+		
+		today: moment().startOf('day'),
+		
+		dateChanged : function(newDate/* , oldDate */) {
+			if(this.inCurrentYear()) {
+				this.hideYear = true;
+				this.fire('year-hidden');
+			}
+			else {
+				this.hideYear = false;
+				this.fire('year-shown');
+			}
+			this.formatDate(newDate);
+		},
+		
+		setHideYear: function(hideYear) {
+			this.hideYear = hideYear;
+			this.formatDate(this.date);
+		},
+		
+		inCurrentYear: function() {
+			var momentDate = moment(this.date);
+			return momentDate.isSame(this.today, 'year');
+			
+		},
+		
+		dateWithYear: function () {
+			return 'MMM D[,] YYYY';
+		},
+		
+		dateWithoutYear: function () {
+			return 'MMM D';
+		},
+		
+		formatDate: function(date) {
+			var dateStartOfDay = moment(date).startOf('day');
+			var self = this;
+			if(this.hideYear) {
+				moment.locale('en', {
+					calendar : {
+						lastDay : '[Yesterday]',
+						sameDay : '[Today]',
+						nextDay : '[Tomorrow]',
+						lastWeek : self.dateWithoutYear,
+						nextWeek : 'dddd',
+						sameElse : self.dateWithoutYear
+					}
+				});
+			}
+			else {
+				moment.locale('en', {
+					calendar : {
+						lastDay : '[Yesterday]',
+						sameDay : '[Today]',
+						nextDay : '[Tomorrow]',
+						lastWeek : self.dateWithYear,
+						nextWeek : 'dddd',
+						sameElse : self.dateWithYear
+					}
+				});
+			}
+			
+			this._setFriendlyDate(dateStartOfDay.calendar(this.today));
+		}
+	});
+</script>
+</dom-module>

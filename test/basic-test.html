@@ -16,29 +16,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../google-at-uh.html">
+    <link rel="import" href="../friendly-date.html">
   </head>
   <body>
 
-  <!-- TODO Add tests (below is just the polymer seed-element test) -->
-
-  <google-at-uh
-          id="authentication"
-          uh-jwt-url=""
-          google-user="{{googleUser}}"
-          uh-user="{{uhUser}}"
-          loading="{{authenticationLoading}}">
-  </google-at-uh>
+  <friendly-date id="theDate"></friendly-date>
 
     <script>
-      var googleAtUH = document.querySelector('google-at-uh');
+      var googleAtUH = document.querySelector('friendly-date');
 
-      suite('<google-at-uh>', function() {
+      suite('<friendly-date>', function() {
 
-        test('default values test', function() {
-          assert.equal(googleAtUH.googleUser, null);
-          assert.equal(googleAtUH.uhUser, null);
-          assert.equal(googleAtUH.loading, false);
+        test('TODO', function() {
+          assert.equal(null, null);
         });
 
       });
