@@ -36,8 +36,6 @@
 			}
 		},
 		
-		today: moment().startOf('day'),
-		
 		dateChanged : function(newDate/* , oldDate */) {
 			if(this.inCurrentYear()) {
 				this.hideYear = true;
@@ -57,7 +55,7 @@
 		
 		inCurrentYear: function() {
 			var momentDate = moment(this.date);
-			return momentDate.isSame(this.today, 'year');
+			return momentDate.isSame(moment().startOf('day'), 'year');
 			
 		},
 		
@@ -97,7 +95,7 @@
 				});
 			}
 			
-			this._setFriendlyDate(dateStartOfDay.calendar(this.today));
+			this._setFriendlyDate(dateStartOfDay.calendar(moment().startOf('day')));
 		}
 	});
 </script>

@@ -1,6 +1,6 @@
 {
   "name": "friendly-date",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Polymer element to implement Google's material design spec for data formats.",
   "main": "friendly-date.html",
   "homepage": "https://github.com/uhawaii-system-its-mis-components/friendly-date/",
