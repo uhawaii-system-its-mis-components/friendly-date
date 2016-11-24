@@ -1,0 +1,86 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="friendly-date.html">
+
+<!--
+
+ http://www.google.com/design/spec/patterns/data-formats.html#
+
+ See the <a href="test/index.html">tests page</a> for test results (only if running locally using `polyserv`).
+
+ @demo demo/index.html
+
+-->
+<dom-module id="friendly-date-range">
+<template>
+	<friendly-date id="firstFriendlyDate"
+		date="{{firstDate}}"
+		on-friendly-date-changed="firstFriendlyDateChanged"
+		on-year-shown="firstYearShown"
+		on-year-hidden="firstYearHidden">
+	</friendly-date>
+	-
+	<friendly-date
+		id="secondFriendlyDate"
+		date="{{secondDate}}"
+		on-friendly-date-changed="secondFriendlyDateChanged"
+		on-year-shown="secondYearShown"
+		on-year-hidden="secondYearHidden">
+	</friendly-date>
+</template>
+<script>
+
+	Polymer({
+		is: 'friendly-date-range',
+		properties: {
+			firstDate: {
+				type: String
+			},
+			secondDate: String,
+			firstFriendlyDate: {
+				type: String,
+				notify: true,
+				readOnly: true
+			},
+			secondFriendlyDate: {
+				type: String,
+				notify: true,
+				readOnly: true
+			},			
+		},
+		firstFriendlyDateChanged: function(e) {
+			this._setFirstFriendlyDate(e.detail.value);
+		},
+		secondFriendlyDateChanged: function(e) {
+			this._setSecondFriendlyDate(e.detail.value);
+		},
+		firstYearShown: function(/* e */) {
+			this.$.secondFriendlyDate.setHideYear(false);
+		},
+		//The first date has been changed and doesn't need to hide it's date
+		firstYearHidden: function(/* e */) {
+			//if second date is in also in current year so leave the first and make sure the second is showing the year 
+			if(this.$.secondFriendlyDate.inCurrentYear()) {
+				this.$.secondFriendlyDate.setHideYear(true);
+			}
+			//otherwise the second date is not the current year so show year of first date
+			else {
+				this.$.firstFriendlyDate.setHideYear(false);
+			}
+		},
+		secondYearShown: function(/* e */) {
+			this.$.firstFriendlyDate.setHideYear(false);
+		},
+		//The second date has been changed and doesn't need to hide it's date
+		secondYearHidden: function(/* e */) {
+			//if first date is in also in current year so leave the second and make sure the first is showing the year 
+			if(this.$.firstFriendlyDate.inCurrentYear()) {
+				this.$.firstFriendlyDate.setHideYear(true);
+			}
+			//otherwise the first date is not the current year so show year of second date
+			else {
+				this.$.secondFriendlyDate.setHideYear(false);
+			}
+		}
+	});
+</script>
+</dom-module>

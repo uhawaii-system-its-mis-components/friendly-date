@@ -1,0 +1,30 @@
+{
+  "name": "friendly-date",
+  "description": "Polymer element to implement Google's material design spec for data formats.",
+  "main": "friendly-date.html",
+  "homepage": "https://github.com/uhawaii-system-its-mis-components/friendly-date/",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "moment": "~2"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*",
+    "uh-styles": "uhawaii-system-its-mis-components/uh-styles"
+  },
+  "_release": "557a875c26",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "557a875c26158c3863687129eae9622b61678bfb"
+  },
+  "_source": "https://github.com/uhawaii-system-its-mis-components/friendly-date.git",
+  "_target": "master",
+  "_originalSource": "uhawaii-system-its-mis-components/friendly-date",
+  "_direct": true
+}
