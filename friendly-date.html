@@ -29,13 +29,17 @@
 				type: Boolean,
 				value: false
 			},
+			showTime: {
+				type: Boolean,
+				value: false
+			},
 			friendlyDate: {
 				type: String,
 				notify: true,
 				readOnly: true
 			}
 		},
-		
+
 		dateChanged : function(newDate/* , oldDate */) {
 			if(this.inCurrentYear()) {
 				this.hideYear = true;
@@ -47,55 +51,64 @@
 			}
 			this.formatDate(newDate);
 		},
-		
+
 		setHideYear: function(hideYear) {
 			this.hideYear = hideYear;
 			this.formatDate(this.date);
 		},
-		
+
 		inCurrentYear: function() {
 			var momentDate = moment(this.date);
 			return momentDate.isSame(moment().startOf('day'), 'year');
-			
+
 		},
-		
+
 		dateWithYear: function () {
-			return 'MMM D[,] YYYY';
+			return ;
 		},
-		
+
 		dateWithoutYear: function () {
-			return 'MMM D';
+			return ;
 		},
-		
+
 		formatDate: function(date) {
-			var dateStartOfDay = moment(date).startOf('day');
-			var self = this;
+			var dateMoment = moment(date);
+
+			var format = {
+				lastDay : '[Yesterday]',
+				sameDay : '[Today]',
+				nextDay : '[Tomorrow]',
+				lastWeek : 'MMM D[,] YYYY',
+				nextWeek : 'dddd',
+				sameElse : 'MMM D[,] YYYY'
+			};
+
+			if(this.showTime) {
+				format = {
+					lastDay : '[Yesterday, ] LT',
+					sameDay : '[Today, ] LT',
+					nextDay : '[Tomorrow, ] LT',
+					lastWeek : 'MMM D[,] YYYY, LT',
+					nextWeek : 'dddd, LT',
+					//Too far in the past, still don't show time
+					sameElse : 'MMM D[,] YYYY'
+				};
+			}
+
 			if(this.hideYear) {
-				moment.locale('en', {
-					calendar : {
-						lastDay : '[Yesterday]',
-						sameDay : '[Today]',
-						nextDay : '[Tomorrow]',
-						lastWeek : self.dateWithoutYear,
-						nextWeek : 'dddd',
-						sameElse : self.dateWithoutYear
-					}
-				});
+				format.lastWeek = 'MMM D';
+				format.sameElse = 'MMM D';
+				if(this.showTime) {
+					format.lastWeek += "[, ] LT";
+				}
+			}
+
+			if(this.showTime) {
+				this._setFriendlyDate(moment(date).calendar(moment(), format));
 			}
 			else {
-				moment.locale('en', {
-					calendar : {
-						lastDay : '[Yesterday]',
-						sameDay : '[Today]',
-						nextDay : '[Tomorrow]',
-						lastWeek : self.dateWithYear,
-						nextWeek : 'dddd',
-						sameElse : self.dateWithYear
-					}
-				});
+				this._setFriendlyDate(moment(date).startOf('day').calendar(moment().startOf('day'), format));
 			}
-			
-			this._setFriendlyDate(dateStartOfDay.calendar(moment().startOf('day')));
 		}
 	});
 </script>
