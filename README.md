@@ -1,3 +1,19 @@
-[![Build Status](https://travis-ci.org/uhawaii-system-its-mis-components/friendly-date.svg?branch=master)](https://travis-ci.org/uhawaii-system-its-mis-components/friendly-date)
+# friendly-date
 
-_[Demo and API docs](http://uhawaii-system-its-mis-components.github.io/friendly-date/)_
+Start a development environment with:
+
+```
+make
+```
+Then, the first time:
+
+```
+yarn install
+polymer serve --hostname 0.0.0.0
+```
+
+or just
+
+```
+polymer serve --hostname 0.0.0.0
+```
