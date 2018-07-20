@@ -5,7 +5,6 @@ import moment from 'moment'
 
 class FriendlyDate extends LitElement {
 
-  // Public property API that triggers re-render (synced with attributes)
   static get properties() {
     return {
       date: Date,
@@ -17,11 +16,6 @@ class FriendlyDate extends LitElement {
   constructor() {
     super();
     this.date = new Date();
-    this.showTime = false;
-  }
-
-  _shouldRender(props, changedProps, old) {
-    return true;
   }
 
   _render() {
@@ -35,8 +29,13 @@ class FriendlyDate extends LitElement {
     return momentDate.isSame(moment().startOf('day'), 'year');
   }
 
-  get yearHidden() {
-    return this.hideYear || this.dateInCurrentYear;
+  shouldHideYear() {
+    if(this.hideYear == undefined) {
+      return this.dateInCurrentYear;
+    }
+    else {
+      return this.hideYear;
+    }
   }
 
   get formattedDate() {
@@ -63,7 +62,7 @@ class FriendlyDate extends LitElement {
       };
     }
 
-    if(this.yearHidden) {
+    if(this.shouldHideYear()) {
       format.lastWeek = 'MMM D';
       format.sameElse = 'MMM D';
       if(this.showTime) {
