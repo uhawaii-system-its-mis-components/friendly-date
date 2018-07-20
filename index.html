@@ -12,6 +12,7 @@
   <script type="module">
     import {LitElement, html} from '@polymer/lit-element';
     import './friendly-date.js';
+    import './friendly-date-range.js';
 
     class DemoElement extends LitElement {
       static get properties() {
@@ -143,14 +144,41 @@
               </div>
             </div>
           </div>
+
+          <h3>friendly-date-range</h3>
+          <div class="mdc-card">
+            <div>
+              <div class="row-header">
+                <h5>&nbsp;</h5>
+                <p><span>Today - Tomorrow</span></p>
+                <p><span>Yesterday - Today</span></p>
+                <p><span>Yesterday - Tomorrow</span></p>
+                <p><span>A month ago - A month from now</span></p>
+                <p><span>A month ago - A year from now</span></p>
+                <p><span>A year ago - A month from now</span></p>
+                <p><span>A year ago - A year from now</span></p>
+              </div>
+
+              <div>
+                <h5>Basic Use</h5>
+                <p><friendly-date-range firstDate=${new Date()} secondDate=${new Date().setDate(new Date().getDate() + 1)}></friendly-date></p>
+                <p><friendly-date-range firstDate=${new Date().setDate(new Date().getDate() - 1)} secondDate=${new Date()}></friendly-date></p>
+                <p><friendly-date-range firstDate=${new Date().setDate(new Date().getDate() - 1)} secondDate=${new Date().setDate(new Date().getDate() + 1)}></friendly-date></p>
+                <p><friendly-date-range firstDate=${new Date().setMonth(new Date().getMonth() - 1)} secondDate=${new Date().setMonth(new Date().getMonth() + 1)}></friendly-date></p>
+                <p><friendly-date-range firstDate=${new Date().setMonth(new Date().getMonth() - 1)} secondDate=${new Date().setFullYear(new Date().getFullYear() + 1)}></friendly-date></p>
+                <p><friendly-date-range firstDate=${new Date().setFullYear(new Date().getFullYear() - 1)} secondDate=${new Date().setMonth(new Date().getMonth() + 1)}></friendly-date></p>
+                <p><friendly-date-range firstDate=${new Date().setFullYear(new Date().getFullYear() - 1)} secondDate=${new Date().setFullYear(new Date().getFullYear() + 1)}></friendly-date></p>
+              </div>
+
+            </div>
+          </div>
         `;
       }
     }
     customElements.define('demo-element', DemoElement);
-
   </script>
 
-  <demo-element></demo-element>
+  <demo-element id="demo"></demo-element>
 
 </body>
 </html>
