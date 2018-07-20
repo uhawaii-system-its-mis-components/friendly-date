@@ -1,20 +1,156 @@
-<!doctype html>
-<html>
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../iron-component-page/iron-component-page.html">
-
-</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Demo: friendly-date and friendly-date-range</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  </head>
 <body>
-  <!-- Note: if the main element for this repository doesn't
-       match the folder name, add a src="&lt;main-component&gt;.html" attribute,
-       where &lt;main-component&gt;.html" is a file that imports all of the
-       components you want documented. -->
-  <iron-component-page src="imports.html"></iron-component-page>
+
+  <script type="module">
+    import {LitElement, html} from '@polymer/lit-element';
+    import './friendly-date.js';
+
+    class DemoElement extends LitElement {
+      static get properties() {
+        return {
+        }
+      }
+      constructor() {
+        super();
+      }
+      _render() {
+        return html`
+          <link rel='stylesheet' href='./node_modules/@material/card/dist/mdc.card.css' />
+          <style>
+            initial-avatar {
+              height: 40px;
+              width: 40px;
+              margin: 5px;
+            }
+            div.mdc-card {
+              margin: 1em;
+              padding:1em;
+            }
+            div.mdc-card div {
+              display:flex;
+              flex-direction: row;
+              margin-left: 1em;
+            }
+            div.mdc-card div div {
+              display:flex;
+              flex-direction: column;
+              margin-left: 1em;
+            }
+            div.mdc-card div div {
+              text-align: center;
+            }
+            div.mdc-card div div.row-header {
+              text-align: left;
+              font-weight: bold;
+            }
+          </style>
+
+          <h1>Demo</h1>
+          <h3>friendly-date</h3>
+          <div class="mdc-card">
+            <div>
+              <div class="row-header">
+                <h5>&nbsp;</h5>
+                <p><span>Now</span></p>
+                <p><span>In Two hours</span></p>
+                <p><span>Two hours ago</span></p>
+                <p><span>Tomorrow</span></p>
+                <p><span>Yesterday</span></p>
+                <p><span>In a few days</span></p>
+                <p><span>A few days ago</span></p>
+                <p><span>In two weeks</span></p>
+                <p><span>Two weeks ago</span>></p>
+                <p><span>In a months</span></p>
+                <p><span>A Month ago</span></p>
+                <p><span>In a year</span></p>
+                <p><span>A year ago</span></p>
+              </div>
+
+              <div>
+                <h5>Default</h5>
+                <p><friendly-date date=${new Date()}></friendly-date></p>
+                <p><friendly-date date=${new Date().setHours(new Date().getHours() + 2)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setHours(new Date().getHours() - 2)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setDate(new Date().getDate() + 1)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setDate(new Date().getDate() - 1)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setDate(new Date().getDate() + 4)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setDate(new Date().getDate() - 4)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setDate(new Date().getDate() + 14)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setDate(new Date().getDate() - 14)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setMonth(new Date().getMonth() + 1)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setMonth(new Date().getMonth() - 1)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setFullYear(new Date().getFullYear() + 1)}></friendly-date></p>
+                <p><friendly-date date=${new Date().setFullYear(new Date().getFullYear() - 1)}></friendly-date></p>
+              </div>
+
+              <div>
+                <h5>showTime=true, hideYear=false</h5>
+                <p><friendly-date showTime="true" date=${new Date()}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setHours(new Date().getHours() + 2)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setHours(new Date().getHours() - 2)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setDate(new Date().getDate() + 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setDate(new Date().getDate() - 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setDate(new Date().getDate() + 4)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setDate(new Date().getDate() - 4)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setDate(new Date().getDate() + 14)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setDate(new Date().getDate() - 14)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setMonth(new Date().getMonth() + 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setMonth(new Date().getMonth() - 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setFullYear(new Date().getFullYear() + 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" date=${new Date().setFullYear(new Date().getFullYear() - 1)}></friendly-date></p>
+              </div>
+
+              <div>
+                <h5>showTime=false, hideYear=true</h5>
+                <p><friendly-date hideYear="true" date=${new Date()}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setHours(new Date().getHours() + 2)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setHours(new Date().getHours() - 2)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setDate(new Date().getDate() + 1)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setDate(new Date().getDate() - 1)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setDate(new Date().getDate() + 4)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setDate(new Date().getDate() - 4)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setDate(new Date().getDate() + 14)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setDate(new Date().getDate() - 14)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setMonth(new Date().getMonth() + 1)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setMonth(new Date().getMonth() - 1)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setFullYear(new Date().getFullYear() + 1)}></friendly-date></p>
+                <p><friendly-date hideYear="true" date=${new Date().setFullYear(new Date().getFullYear() - 1)}></friendly-date></p>
+              </div>
+
+              <div>
+                <h5>showTime=true, hideYear=true</h5>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date()}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setHours(new Date().getHours() + 2)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setHours(new Date().getHours() - 2)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setDate(new Date().getDate() + 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setDate(new Date().getDate() - 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setDate(new Date().getDate() + 4)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setDate(new Date().getDate() - 4)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setDate(new Date().getDate() + 14)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setDate(new Date().getDate() - 14)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setMonth(new Date().getMonth() + 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setMonth(new Date().getMonth() - 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setFullYear(new Date().getFullYear() + 1)}></friendly-date></p>
+                <p><friendly-date showTime="true" hideYear="true" date=${new Date().setFullYear(new Date().getFullYear() - 1)}></friendly-date></p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+    customElements.define('demo-element', DemoElement);
+
+  </script>
+
+  <demo-element></demo-element>
 
 </body>
 </html>
